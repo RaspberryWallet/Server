@@ -1,19 +1,19 @@
 package io.raspberrywallet.server
 
 import io.raspberrywallet.BackendProvider
+import io.raspberrywallet.ManagerMockup
 import io.vertx.core.AbstractVerticle
-import io.vertx.core.Future
 
-class MainVerticle(val backend : BackendProvider?) : AbstractVerticle() {
+class MainVerticle(private val backend: BackendProvider = ManagerMockup()) : AbstractVerticle() {
 
-    override fun start(startFuture: Future<Void>?) {
-        super.start(startFuture)
+    override fun start() {
         vertx.createHttpServer().requestHandler({ req ->
             req.response()
                 .putHeader("content-type", "text/plain")
-                .end("Hello from Vert.x!")
+                .end("Manager says ${backend.ping()}")
         }).listen(8080)
         println("HTTP server started on port 8080")
     }
+
 
 }
