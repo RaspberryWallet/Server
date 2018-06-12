@@ -1,11 +1,17 @@
 package io.raspberrywallet.server
 
 import io.raspberrywallet.BackendProvider
-import io.raspberrywallet.ManagerMockup
 import io.vertx.core.AbstractVerticle
+import io.vertx.core.Vertx
 
-class MainVerticle(private val backend: BackendProvider = ManagerMockup()) : AbstractVerticle() {
+class Server(private val backend: BackendProvider){
+    fun start(){
+        val vertx = Vertx.vertx()
+        vertx.deployVerticle(MainVerticle(backend))
+    }
+}
 
+class MainVerticle(private val backend: BackendProvider) : AbstractVerticle() {
     override fun start() {
         vertx.createHttpServer().requestHandler({ req ->
             req.response()

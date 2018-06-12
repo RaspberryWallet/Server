@@ -1,8 +1,8 @@
 package io.raspberrywallet.server
 
-import io.vertx.core.Vertx
+import io.raspberrywallet.ManagerMockup
 
 fun main(args: Array<String>) {
-    val vertx = Vertx.vertx()
-    vertx.deployVerticle(MainVerticle())
+    val server = Server(ManagerMockup())
+    server.start()
 }
