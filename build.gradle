@@ -1,7 +1,7 @@
 buildscript {
     ext {
         vertxVersion = '3.5.2'
-        kotlin_version = '1.2.41'
+        kotlin_version = '1.2.50'
     }
 
     repositories {
@@ -23,7 +23,7 @@ plugins {
 }
 apply plugin: 'kotlin'
 
-version = '1.0.5-alpha'
+version = '1.0.6-alpha'
 sourceCompatibility = '1.8'
 
 dependencies {

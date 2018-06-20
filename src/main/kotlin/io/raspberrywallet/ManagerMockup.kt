@@ -6,6 +6,13 @@ import io.raspberrywallet.step.SimpleStep
 import java.util.*
 
 class ManagerMockup : Manager {
+    override fun getAddress(): ByteArray {
+        return "133asfafs6fd6xvz67zvx55sad6f5fd".toByteArray()
+    }
+
+    override fun restoreFromBackupPhrase(mnemonicWords: MutableList<String>) {
+
+    }
 
 
     override fun getModules(): MutableList<Module> {
