@@ -6,7 +6,7 @@ start server by invoking
 ```java
 new Server(this).start();
 ```
-You will need to implement `io.raspberrywallet.BackendProvider`
+You will need to implement `io.raspberrywallet.Manager`
  
 ## Dependency
 ### Gradle
