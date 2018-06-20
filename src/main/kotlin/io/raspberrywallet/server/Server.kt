@@ -12,7 +12,7 @@ class Server(private val manager: BackendProvider) {
     }
 }
 
-class MainVerticle(private val manager: BackendProvider) : CoroutineVerticle() {
+internal class MainVerticle(private val manager: BackendProvider) : CoroutineVerticle() {
     override suspend fun start() {
         vertx.createHttpServer().requestHandler({ req ->
             req.response()
