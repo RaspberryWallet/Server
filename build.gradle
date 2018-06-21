@@ -52,12 +52,10 @@ shadowJar {
 }
 
 run {
-    args = ['run',
-            mainClassName,
+    args = ['run', mainClassName,
             "--launcher-class=io.vertx.core.Launcher",
             "--redeploy=src/**/*.*",
-            "--on-redeploy=./gradlew classes"
-    ]
+            "--on-redeploy=./gradlew classes"]
 }
 
 kotlin {

@@ -17,7 +17,13 @@ import kotlinx.coroutines.experimental.launch
 class Server(private val manager: Manager) {
     fun start() {
         val vertx = Vertx.vertx()
-        vertx.deployVerticle(MainVerticle(manager))
+        vertx.deployVerticle(MainVerticle(manager)){
+            if(it.succeeded()) println("Server started")
+            else {
+                println("Could not start server")
+                it.cause().printStackTrace()
+            }
+        }
     }
 }
 
@@ -26,22 +32,21 @@ internal class MainVerticle(private val manager: Manager) : CoroutineVerticle() 
         val router = Router.router(vertx)
         router.get("/ping").coroutineHandler {
             it.response().end(json {
-                obj ( "ping" to manager.ping()).encodePrettily()
+                obj("ping" to manager.ping()).encodePrettily()
             })
         }
 
         router.get("/modules").coroutineHandler {
             it.response().end(json {
-                array (
+                array(
                     manager.modules
                 ).encodePrettily()
 
             })
         }
         router.get("/moduleState/:id").coroutineHandler {
-
             it.response().end(json {
-                obj (
+                obj(
                     it.pathParam("id") to manager.getModuleState(it.pathParam("id"))
                 ).encodePrettily()
 
