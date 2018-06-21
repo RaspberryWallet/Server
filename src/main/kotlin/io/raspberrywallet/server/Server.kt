@@ -35,7 +35,6 @@ internal class MainVerticle(private val manager: Manager) : CoroutineVerticle() 
                 obj("ping" to manager.ping()).encodePrettily()
             })
         }
-
         router.get("/modules").coroutineHandler {
             it.response().end(json {
                 array(

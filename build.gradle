@@ -21,20 +21,17 @@ plugins {
     id 'application'
     id 'com.github.johnrengelman.shadow' version '2.0.1'
 }
+apply plugin: 'maven'
 apply plugin: 'kotlin'
 
 version = '1.0.8-alpha'
 sourceCompatibility = '1.8'
 
-dependencies {
-    compile "io.vertx:vertx-core:$vertxVersion"
-    compile "io.vertx:vertx-web:$vertxVersion"
-    compile "io.vertx:vertx-unit:$vertxVersion"
-    compile "io.vertx:vertx-jdbc-client:$vertxVersion"
-    compile "io.vertx:vertx-lang-kotlin:$vertxVersion"
-    compile "io.vertx:vertx-lang-kotlin-coroutines:$vertxVersion"
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
+
 
 mainClassName = 'io.raspberrywallet.server.MainVerticle'
 
@@ -58,6 +55,18 @@ run {
             "--on-redeploy=./gradlew classes"]
 }
 
+dependencies {
+    implementation "io.vertx:vertx-core:$vertxVersion"
+    implementation "io.vertx:vertx-web:$vertxVersion"
+    implementation "io.vertx:vertx-unit:$vertxVersion"
+    implementation "io.vertx:vertx-jdbc-client:$vertxVersion"
+    implementation "io.vertx:vertx-lang-kotlin:$vertxVersion"
+    implementation "io.vertx:vertx-lang-kotlin-coroutines:$vertxVersion"
+    implementation 'com.github.stasbar:easy-logger:1.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+
+
 kotlin {
     experimental {
         coroutines 'enable'
@@ -67,9 +76,7 @@ kotlin {
 task wrapper(type: Wrapper) {
     gradleVersion = '4.0'
 }
-repositories {
-    mavenCentral()
-}
+
 
 compileKotlin {
     kotlinOptions {
