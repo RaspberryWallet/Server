@@ -23,17 +23,17 @@ plugins {
 }
 apply plugin: 'kotlin'
 
-version = '1.0.6-alpha'
+version = '1.0.8-alpha'
 sourceCompatibility = '1.8'
 
 dependencies {
-
     compile "io.vertx:vertx-core:$vertxVersion"
     compile "io.vertx:vertx-web:$vertxVersion"
     compile "io.vertx:vertx-unit:$vertxVersion"
+    compile "io.vertx:vertx-jdbc-client:$vertxVersion"
+    compile "io.vertx:vertx-lang-kotlin:$vertxVersion"
     compile "io.vertx:vertx-lang-kotlin-coroutines:$vertxVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-
 }
 
 mainClassName = 'io.raspberrywallet.server.MainVerticle'

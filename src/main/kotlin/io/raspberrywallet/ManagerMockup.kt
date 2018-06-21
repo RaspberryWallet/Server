@@ -11,7 +11,9 @@ class ManagerMockup : Manager {
     }
 
     override fun restoreFromBackupPhrase(mnemonicWords: MutableList<String>) {
-
+        val phrase = mnemonicWords.reduce { acc, s -> acc + s }
+        //TODO restore privatekey from backupphrase and store it safely
+        println(phrase)
     }
 
 
@@ -22,7 +24,10 @@ class ManagerMockup : Manager {
         return mutableListOf(module, module2, module3)
     }
 
-    override fun getModuleState(moduleId: String): ModuleState = ModuleState.WAITING
+    override fun getModuleState(moduleId: String): ModuleState {
+        val randomIndex = Random().nextInt(ModuleState.values().size)
+        return ModuleState.values()[randomIndex]
+    }
 
     override fun nextStep(moduleId: String, input: ByteArray?): Response =
         if (Random().nextBoolean())
