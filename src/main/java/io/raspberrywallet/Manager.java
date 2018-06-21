@@ -9,7 +9,15 @@ import java.util.List;
 
 public interface Manager {
     String ping(); // for DEBUG purposes
+
+    /**
+     * @return all available modules
+     */
     List<Module> getModules();
+
+    /**
+     * @return state of specified module
+     */
     ModuleState getModuleState(@NotNull String moduleId);
 
     /**
