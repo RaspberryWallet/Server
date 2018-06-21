@@ -53,8 +53,13 @@ run {
             "--launcher-class=io.vertx.core.Launcher",
             "--redeploy=src/**/*.*",
             "--on-redeploy=./gradlew classes"]
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
 }
-
+artifacts {
+    archives shadowJar
+}
 dependencies {
     implementation "io.vertx:vertx-core:$vertxVersion"
     implementation "io.vertx:vertx-web:$vertxVersion"
