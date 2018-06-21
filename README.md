@@ -24,8 +24,9 @@ You will need to implement `io.raspberrywallet.Manager`
 **Step 2.** Add the dependency
 ```gradle
 	dependencies {
-	        implementation 'com.github.RaspberryWallet:Server:0.0.1-alpha'
+	        implementation 'com.github.raspberrywallet:server:0.0.10-alpha'
 	}
+
 ```
 ## Maven
 **Step 1.** Add the JitPack repository to your build file
@@ -43,7 +44,8 @@ You will need to implement `io.raspberrywallet.Manager`
 	<dependency>
 	    <groupId>com.github.RaspberryWallet</groupId>
 	    <artifactId>Server</artifactId>
-	    <version>0.0.1-alpha</version>
+	    <version>0.0.10-alpha</version>
 	</dependency>
+
 ```
 
