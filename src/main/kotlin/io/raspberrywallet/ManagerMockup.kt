@@ -6,36 +6,39 @@ import io.raspberrywallet.step.SimpleStep
 import java.util.*
 
 class ManagerMockup : Manager {
+
+    class SampleModule(name: String, description: String) : Module(name, description)
+
+    private val modulesList = listOf(SampleModule("PIN", "Module that require enter 4 digits code"),
+        SampleModule("Button", "Module that require to push the button"),
+        SampleModule("Server", "Module that require to authenticate with external server"),
+        SampleModule("Google Authenticator", "Module that require to enter google auth code"))
+
+    private val rand = Random()
+
     override fun getAddress(): ByteArray {
-        return "133asfafs6fd6xvz67zvx55sad6f5fd".toByteArray()
+        return "133asfafs6fd6xvz67zvx55sad6f5f".toByteArray()
     }
 
     override fun restoreFromBackupPhrase(mnemonicWords: MutableList<String>) {
         val phrase = mnemonicWords.reduce { acc, s -> acc + s }
-        //TODO restore privatekey from backupphrase and store it safely
+        //TODO restore privatekey from backup phrase and store it safely
         println(phrase)
     }
 
 
-    override fun getModules(): MutableList<Module> {
-        val module = object : Module("Module1") {}
-        val module2 = object : Module("Module2") {}
-        val module3 = object : Module("Button") {}
-        return mutableListOf(module, module2, module3)
-    }
+    override fun getModules(): List<Module> = modulesList
 
     override fun getModuleState(moduleId: String): ModuleState {
-        val randomIndex = Random().nextInt(ModuleState.values().size)
-        return ModuleState.values()[randomIndex]
+        val randomIndex = rand.nextInt(ModuleState.values().size)
+        return ModuleState.values()[randomIndex].apply { message = "it's doing great" }
     }
 
     override fun nextStep(moduleId: String, input: ByteArray?): Response =
-        if (Random().nextBoolean())
-            Response(SimpleStep("Do something"),
-                Response.Status.OK)
+        if (rand.nextBoolean())
+            Response(SimpleStep("Do something"), Response.Status.OK)
         else
-            Response(null,
-                Response.Status.FAILED)
+            Response(null, Response.Status.FAILED)
 
-    override fun ping(): String = "pong"
+    override fun ping() = "pong"
 }

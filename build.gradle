@@ -12,7 +12,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.50"
     }
 }
 
@@ -32,7 +32,7 @@ repositories {
 }
 
 
-mainClassName = 'io.raspberrywallet.server.MainVerticle'
+mainClassName = 'io.raspberrywallet.MainKt'
 
 
 run {
@@ -52,7 +52,7 @@ dependencies {
     implementation "io.vertx:vertx-lang-kotlin:$vertxVersion"
     implementation "io.vertx:vertx-lang-kotlin-coroutines:$vertxVersion"
     implementation 'com.github.stasbar:easy-logger:1.2'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.50"
 }
 
 

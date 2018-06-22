@@ -1,20 +1,31 @@
 package io.raspberrywallet.module;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.UUID;
 
 public abstract class Module {
-    private final String name;
-    private final String id = UUID.randomUUID().toString();
+    @NotNull private final String id = UUID.randomUUID().toString();
+    @NotNull private final String name;
+    @NotNull private final String description;
 
-    public Module(String name) {
+    public Module(@NotNull String name, @NotNull String description) {
         this.name = name;
+        this.description = description;
     }
 
+    @NotNull
+    public String getId() {
+        return id;
+    }
+
+    @NotNull
     public String getName() {
         return name;
     }
 
-    public String getId() {
-        return id;
+    @NotNull
+    public String getDescription() {
+        return description;
     }
 }
