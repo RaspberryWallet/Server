@@ -55,6 +55,13 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.50"
 }
 
+task fetchAssets(){
+    def f = new File('src/main/resources/assets/')
+    if (!f.exists()) {
+        new URL('http://the_url').withInputStream{ i -> f.withOutputStream{ it << i }}
+    }
+}
+
 
 kotlin {
     experimental {
