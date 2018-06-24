@@ -3,10 +3,12 @@ package io.raspberrywallet.server
 import com.stasbar.Logger
 import io.raspberrywallet.Manager
 import io.vertx.core.Vertx
+import io.vertx.core.http.HttpMethod
 import io.vertx.core.http.HttpServer
 import io.vertx.ext.web.Route
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
+import io.vertx.ext.web.handler.CorsHandler
 import io.vertx.ext.web.handler.StaticHandler
 import io.vertx.kotlin.core.json.array
 import io.vertx.kotlin.core.json.json
@@ -33,6 +35,7 @@ class Server(private val manager: Manager) {
 internal class MainVerticle(private val manager: Manager) : CoroutineVerticle() {
     override suspend fun start() {
         val router = Router.router(vertx)
+        acceptCORS(router)
         router.get("/api/ping").coroutineHandler {
             Logger.d("/ping")
             it.response().end(json {
@@ -65,6 +68,23 @@ internal class MainVerticle(private val manager: Manager) : CoroutineVerticle() 
                 .listen(config.getInteger("http.port", 8080), it)
         }
     }
+}
+
+fun acceptCORS(router: Router) {
+    val allowedHeaders = HashSet<String>()
+    allowedHeaders.add("x-requested-with")
+    allowedHeaders.add("Access-Control-Allow-Origin")
+    allowedHeaders.add("origin")
+    allowedHeaders.add("Content-Type")
+    allowedHeaders.add("accept")
+    allowedHeaders.add("X-PINGARUNER")
+
+    val allowedMethods = HashSet<HttpMethod>()
+    allowedMethods.add(HttpMethod.GET)
+    allowedMethods.add(HttpMethod.POST)
+    allowedMethods.add(HttpMethod.OPTIONS)
+
+    router.route().handler(CorsHandler.create("*").allowedHeaders(allowedHeaders).allowedMethod(HttpMethod.GET))
 }
 
 /**

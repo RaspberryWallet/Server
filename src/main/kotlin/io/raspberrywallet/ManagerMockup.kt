@@ -31,7 +31,14 @@ class ManagerMockup : Manager {
 
     override fun getModuleState(moduleId: String): ModuleState {
         val randomIndex = rand.nextInt(ModuleState.values().size)
-        return ModuleState.values()[randomIndex].apply { message = "it's doing great" }
+        val randomModuleState = ModuleState.values()[randomIndex]
+        when (randomModuleState) {
+            ModuleState.READY -> randomModuleState.message = null
+            ModuleState.WAITING -> randomModuleState.message = "Waiting for user interaction"
+            ModuleState.AUTHORIZED -> randomModuleState.message = null
+            ModuleState.FAILED -> randomModuleState.message = "Connection failed"
+        }
+        return randomModuleState
     }
 
     override fun nextStep(moduleId: String, input: ByteArray?): Response =
