@@ -23,9 +23,9 @@ class Server(private val manager: Manager) {
     fun start() {
         val vertx = Vertx.vertx()
         vertx.deployVerticle(MainVerticle(manager)) {
-            if (it.succeeded()) println("Server started")
+            if (it.succeeded()) println("HTTP Server started")
             else {
-                println("Could not start server")
+                println("Could not start HTTP server")
                 it.cause().printStackTrace()
             }
         }
