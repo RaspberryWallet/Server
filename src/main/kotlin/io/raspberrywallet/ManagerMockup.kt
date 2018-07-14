@@ -33,9 +33,9 @@ class ManagerMockup : Manager {
         val randomIndex = rand.nextInt(ModuleState.values().size)
         val randomModuleState = ModuleState.values()[randomIndex]
         when (randomModuleState) {
-            ModuleState.READY -> randomModuleState.message = null
+            ModuleState.READY -> randomModuleState.message = ""
             ModuleState.WAITING -> randomModuleState.message = "Waiting for user interaction"
-            ModuleState.AUTHORIZED -> randomModuleState.message = null
+            ModuleState.AUTHORIZED -> randomModuleState.message = ""
             ModuleState.FAILED -> randomModuleState.message = "Connection failed"
         }
         return randomModuleState
